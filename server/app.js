@@ -4,7 +4,7 @@ import routes from './routes.js';
 const app = express();
 
 // Settings
-app.set('port', process.env.PORT || 8088);
+app.set('port', process.env.PORT || 8090);
 
 // Middlewares
 app.use(express.json({ limit: '500mb', extended: true }));

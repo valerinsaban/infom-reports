@@ -8,9 +8,9 @@ export default (req, res, next) => {
       jwt.verify(token, key);
       next();
     } catch {
-      res.status(200).json({ code: 0, error: 'Token de autorizacion inválido' });
+      res.status(200).json({ resultado: false, error: 'Token de autorizacion inválido' });
     }
   } else {
-    res.status(200).json({ code: 0, error: 'Token de autorizacion ausente' });
+    res.status(200).json({ resultado: false, error: 'Token de autorizacion ausente' });
   }
 };

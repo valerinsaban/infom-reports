@@ -40,7 +40,7 @@ let Prestamo = conn.define('prestamos', {
   freezeTableName: true
 });
 
-Prestamo.belongsTo(TipoPrestamo, { foreignKey: 'id_tipo_prestamo', as: 'tipo_prestamos' });
+Prestamo.belongsTo(TipoPrestamo, { foreignKey: 'id_tipo_prestamo', as: 'tipo_prestamo' });
 TipoPrestamo.hasMany(Prestamo, { foreignKey: 'id_tipo_prestamo', as: 'prestamos' });
 
 export default Prestamo;
