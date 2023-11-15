@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import routes from './routes.js';
 
 const app = express();
@@ -7,6 +8,7 @@ const app = express();
 app.set('port', process.env.PORT || 8090);
 
 // Middlewares
+app.use(cors())
 app.use(express.json({ limit: '500mb', extended: true }));
 app.use(express.urlencoded({ limit: '500mb', extended: true }));
 app.use(express.text());
