@@ -1,6 +1,12 @@
 import conn from '../database/conn.js';
 import Sequelize from 'sequelize';
-import TipoPrestamo from './tipo_prestamo.js';
+import TipoPrestamo from './tipoPrestamo.js';
+import Programa from './programa.js';
+import Municipalidad from './municipalidad.js';
+import Resolucion from './resolucion.js';
+import Funcionario from './funcionario.js';
+import Regional from './regional.js';
+import Usuario from './usuario.js'
 
 let Prestamo = conn.define('prestamos', {
   id: { type: Sequelize.SMALLINT, primaryKey: true },
@@ -42,5 +48,24 @@ let Prestamo = conn.define('prestamos', {
 
 Prestamo.belongsTo(TipoPrestamo, { foreignKey: 'id_tipo_prestamo', as: 'tipo_prestamo' });
 TipoPrestamo.hasMany(Prestamo, { foreignKey: 'id_tipo_prestamo', as: 'prestamos' });
+
+Prestamo.belongsTo(Programa, { foreignKey: 'id_programa', as: 'programa' });
+Programa.hasMany(Prestamo, { foreignKey: 'id_programa', as: 'prestamos' });
+
+Prestamo.belongsTo(Municipalidad, { foreignKey: 'id_municipalidad', as: 'municipalidad' });
+Municipalidad.hasMany(Prestamo, { foreignKey: 'id_municipalidad', as: 'prestamos' });
+
+Prestamo.belongsTo(Resolucion, { foreignKey: 'id_resolucion', as: 'resolucion' });
+Resolucion.hasMany(Prestamo, { foreignKey: 'id_resolucion', as: 'prestamos' });
+
+Prestamo.belongsTo(Funcionario, { foreignKey: 'id_funcionario', as: 'funcionario' });
+Funcionario.hasMany(Prestamo, { foreignKey: 'id_funcionario', as: 'prestamos' });
+
+Prestamo.belongsTo(Regional, { foreignKey: 'id_regional', as: 'regional' });
+Regional.hasMany(Prestamo, { foreignKey: 'id_regional', as: 'prestamos' });
+
+Prestamo.belongsTo(Usuario, { foreignKey: 'id_usuario', as: 'usuario' });
+Usuario.hasMany(Prestamo, { foreignKey: 'id_usuario', as: 'prestamos' });
+
 
 export default Prestamo;

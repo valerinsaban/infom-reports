@@ -1,6 +1,7 @@
 import cf from "../middleware/filtros.js";
 import Prestamo from "../models/prestamo.js";
-import TipoPrestamo from "../models/tipo_prestamo.js";
+import Programa from "../models/programa.js";
+import TipoPrestamo from "../models/tipoPrestamo.js";
 
 function prestamo(app) {
 
@@ -12,6 +13,9 @@ function prestamo(app) {
         include: [
           {
             model: TipoPrestamo, as: 'tipo_prestamo'
+          },
+          {
+            model: Programa, as: 'programa'
           }
         ]
       });
