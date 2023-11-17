@@ -12,7 +12,7 @@ let Prestamo = conn.define('prestamos', {
   id: { type: Sequelize.SMALLINT, primaryKey: true },
   no_dictamen: Sequelize.INTEGER,
   no_convenio: Sequelize.STRING,
-  no_dictamen: Sequelize.STRING,
+  no_prestamo: Sequelize.STRING,
   fecha: Sequelize.STRING,
   fecha_amortizacion: Sequelize.STRING,
   fecha_vencimiento: Sequelize.STRING,
