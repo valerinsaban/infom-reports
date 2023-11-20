@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 let conn = new Sequelize({
-  database: 'infom_backup',
+  database: 'infom',
   host: '108.60.213.146',
   dialect: 'mssql',
   dialectOptions: {
