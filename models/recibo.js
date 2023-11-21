@@ -10,6 +10,7 @@ let Recibo = conn.define('recibos', {
   nombre: Sequelize.STRING,
   monto: Sequelize.STRING,
   estado: Sequelize.STRING,
+  descripcion: Sequelize.STRING,
   id_factura: Sequelize.INTEGER
 }, {
   createdAt: false,

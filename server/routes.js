@@ -1,7 +1,7 @@
-import prestamo from '../routes/prestamo.route.js';
+import reporte from '../routes/reporte.route.js';
 
 function routes(app) {
   
-  prestamo(app);
+  reporte(app);
   
 } export default routes;

@@ -8,10 +8,12 @@ import Programa from "../models/programa.js";
 import TipoPrestamo from "../models/tipoPrestamo.js";
 import Usuario from "../models/usuario.js";
 import Movimiento from "../models/movimiento.js";
+import Recibo from "../models/recibo.js";
+import Factura from "../models/factura.js";
 
-function prestamo(app) {
+function reporte(app) {
 
-  app.get('/prestamos/analizados/:fecha_inicio/:fecha_fin/:id_tipo_prestamo/:id_programa/:id_municipalidad/:id_usuario', async (req, res) => {
+  app.get('/reportes/prestamos/analizados/:fecha_inicio/:fecha_fin/:id_tipo_prestamo/:id_programa/:id_municipalidad/:id_usuario', async (req, res) => {
     try {
       let range = { [Op.between]: [req.params.fecha_inicio, req.params.fecha_fin] };
       delete req.params.fecha_inicio;
@@ -39,7 +41,7 @@ function prestamo(app) {
     }
   });
 
-  app.get('/prestamos/otorgados/:fecha_inicio/:fecha_fin/:id_tipo_prestamo/:id_programa/:id_municipalidad/:id_usuario', async (req, res) => {
+  app.get('/reportes/prestamos/otorgados/:fecha_inicio/:fecha_fin/:id_tipo_prestamo/:id_programa/:id_municipalidad/:id_usuario', async (req, res) => {
     try {
       let range = { [Op.between]: [req.params.fecha_inicio, req.params.fecha_fin] };
       delete req.params.fecha_inicio;
@@ -67,7 +69,7 @@ function prestamo(app) {
     }
   });
 
-  app.get('/prestamos/amortizaciones-detalles/:mes/:fecha_fin/:id_tipo_prestamo/:id_programa/:id_municipalidad/:id_usuario', async (req, res) => {
+  app.get('/reportes/prestamos/amortizaciones-detalles/:mes/:fecha_fin/:id_tipo_prestamo/:id_programa/:id_municipalidad/:id_usuario', async (req, res) => {
     try {
       let params = cf(req.params);
       params.fecha = range;
@@ -92,7 +94,7 @@ function prestamo(app) {
     }
   });
 
-  app.get('/prestamos/balance-general/:fecha', async (req, res) => {
+  app.get('/reportes/prestamos/balance-general/:fecha', async (req, res) => {
     try {
       let prestamos = await Prestamo.findAll({ 
         where: { estado: 'Acreditado' },
@@ -198,4 +200,32 @@ function prestamo(app) {
     }
   });
 
-} export default prestamo;
+  app.get('/reportes/recibos/:fecha_inicio/:fecha_fin', async (req, res) => {
+    try {
+      let range = { [Op.between]: [req.params.fecha_inicio, req.params.fecha_fin] };
+
+      let recibos = await Recibo.findAll({ 
+        where: { fecha: range }
+      });
+      res.status(200).json(recibos);
+    } catch (err) {
+      console.log(err);
+      res.status(200).json({ resultado: false, mensaje: err });
+    }
+  });
+
+  app.get('/reportes/facturas/:fecha_inicio/:fecha_fin', async (req, res) => {
+    try {
+      let range = { [Op.between]: [req.params.fecha_inicio, req.params.fecha_fin] };
+
+      let facturas = await Factura.findAll({ 
+        where: { fecha: range }
+      });
+      res.status(200).json(facturas);
+    } catch (err) {
+      console.log(err);
+      res.status(200).json({ resultado: false, mensaje: err });
+    }
+  });
+
+} export default reporte;
